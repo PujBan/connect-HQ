@@ -8,7 +8,7 @@ class loginpage {
     loginBtn: () => cy.get('#login-submit'),
     emailValidation:() => cy.get('#account > div:nth-child(1) > span'),
     passwordValidation:()=> cy.get('#account > div:nth-child(2) > span'),
-    invalidCredentials:() => cy.get('.validation-summary-errors > ul > li')
+    invalidCredentials:() => cy.get('.validation-summary-errors > ul > li'),
     }
 
     enterEmail(email) {
@@ -31,7 +31,6 @@ class loginpage {
     }
     invalidEmailid(){
         this.elements.invalidCredentials().should('contain.text', 'No such user exists, please enter valid credentials') 
-    }
-    
+    }  
 }
     export default loginpage;   // define as export to import this class in test files

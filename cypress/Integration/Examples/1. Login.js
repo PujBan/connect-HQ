@@ -8,8 +8,9 @@ describe('login page', ()=>{
     login = new loginpage()
 
     beforeEach(()=>{
-        cy.visit(Cypress.env('URL'))
-        cy.get('img[alt=logo]')
+        cy.visit(Cypress.env('baseURL'))
+        cy.wait(6000)
+        cy.get('[alt="logo"]').should('be.visible')
         cy.url().should('include', 'openid.qaconnecthq.live')
     })
     
@@ -33,14 +34,23 @@ describe('login page', ()=>{
         login.invalidEmailid();
 
     })
-    // it('User login', ()=>{
-    //     //const login = new login()
-    //     login.enterEmail(Cypress.env('username'));
-    //     login.enterPassword(Cypress.env('password'));
-    //     login.clickloginBtn();
-    //     cy.on('uncaught:exception', (err, runnable) => {
-    //         return false 
-    //         })
-    // })
+    it('Invalid email & password', ()=>{
+        login.enterEmail(Cypress.env('wrongUsername'));
+        login.enterPassword(Cypress.env('wrongPassword'));
+        cy.wait(5000)
+        login.clickLoginBtn();
+        login.invalidEmailid();
+
+    })
+    it('User login', ()=>{
+            login.enterEmail(Cypress.env('username'));
+            login.enterPassword(Cypress.env('password'));
+            login.clickLoginBtn();
+            cy.wait(6000)
+            cy.visit(Cypress.env('secondoryURL'))  
+            cy.on("uncaught exception", (err, runnable) => {
+                return false;
+              });
+    })
 
 })
