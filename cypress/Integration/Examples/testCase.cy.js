@@ -1,41 +1,46 @@
 /// <reference types = 'cypress'/>
  
-import { beforeEach } from "mocha"
-import login from "../POM/loginpom"
+const loginpage = require('../pageObjects/loginpom')
+let login
 
-// after (()=>{
-//     cy.origin('https://pwa.qaconnecthq.live/')
-// })
+describe('login page', ()=>{
 
-describe('Test Suite', ()=>{
+    login = new loginpage()
 
-    //  beforeEach(()=>{
-    //      cy.origin('https://openid.qaconnecthq.live/Identity/Account/Login?ReturnUrl=%2Fconnect%2Fauthorize%3Frequest_id%3D_aeIKJUMUT-J0tBSg_Kcg6jwlk245GVo0bA0Q75Xsvk')
-    //      cy.wait(6000)
-    //        const lp = new login()
-    //         lp.email();
-    //         lp.password();
-    //         lp.loginBtn();
-    //         cy.on
-    // })
-    it('Login page', ()=>{
-        cy.visit('https://pwa.qaconnecthq.live/')
-        cy.wait(6000)
-          const lp = new login()
-           lp.email();
-           lp.password();
-           lp.loginBtn();
-           cy.on('uncaught:exception', (err, runnable) => {
-
-            return false
-                
-            })
+    beforeEach(()=>{
+        cy.visit(Cypress.env('URL'))
+        cy.get('img[alt=logo]')
+        cy.url().should('include', 'openid.qaconnecthq.live')
+    })
+    
+    it('Required filed Validation', ()=>{
+        login.clickLoginBtn();
+        login.requiredEmail();
+        login.requiredPassword();
 
     })
+    it('Valid email invalid password', ()=>{
+        login.enterEmail(Cypress.env('username'));
+        login.enterPassword('ban123');
+        login.clickLoginBtn();
+        login.invalidPassword();
 
-    // it('Home page', ()=>{
-    //     cy.origin('https://pwa.qaconnecthq.live/')
+    })
+    it('Invalid email valid password', ()=>{
+        login.enterEmail(Cypress.env('wrongUsername'));
+        login.enterPassword(Cypress.env('password'));
+        login.clickLoginBtn();
+        login.invalidEmailid();
 
+    })
+    // it('User login', ()=>{
+    //     //const login = new login()
+    //     login.enterEmail(Cypress.env('username'));
+    //     login.enterPassword(Cypress.env('password'));
+    //     login.clickloginBtn();
+    //     cy.on('uncaught:exception', (err, runnable) => {
+    //         return false 
+    //         })
     // })
 
 })
