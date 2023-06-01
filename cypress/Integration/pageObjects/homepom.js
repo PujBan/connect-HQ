@@ -7,7 +7,8 @@ class homepage{
     clickOnPreviewItem: ()=> cy.get(':nth-child(1) > .ant-image-mask'),
     viewPreview: ()=> cy.get('.ant-image-preview-img'),
     clickOnMenu: ()=> cy.get('.strip.hamburger-strip'),
-    clickOnAlertsMenu: ()=> cy.get(':nth-child(1) > .ant-menu-submenu-title > .ant-menu-title-content')
+    clickOnAlertsMenu: ()=> cy.get(':nth-child(1) > .ant-menu-submenu-title > .ant-menu-title-content'),
+    clickOnCashMenu: ()=> cy.get(":nth-child(2) > .ant-menu-submenu-title > .ant-menu-title-content")
     }
 
     openDeliveryOrderPackingSlipSpan(){
@@ -34,6 +35,9 @@ class homepage{
     }
     openAlertsMenu(){
         this.elements.clickOnAlertsMenu().click()        
+    }
+    openCashMenu(){
+        this.elements.clickOnCashMenu().click()        
     }
 
     

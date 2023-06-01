@@ -10,7 +10,7 @@ describe('Home page', ()=>{
     hp= new homepage()
     login = new loginpage()
 
-    beforeEach(()=>{
+    before(()=>{
         cy.clearAllCookies()
         cy.clearAllLocalStorage()
         cy.clearAllSessionStorage
@@ -58,13 +58,34 @@ describe('Home page', ()=>{
         cy.get('li[title="Next Page"] button[type="button"]').should('be.visible')
     })
 
-    it.only('Go to alerts->service from menu', ()=>{
+    it('Go to alerts->service from menu', ()=>{
         hp.openMenu()
         hp.openAlertsMenu()
-        // go to child pages from alert and perform actions
+        // go to child pages of alerts menu
         cy.get('a[href="/home/alerts/service-list"]').click()
         cy.wait(8000)
         cy.get('div[class="back-btn-title"] h1').should('have.text', 'Service')
+        cy.get('li[title="Previous Page"]').should('be.visible')
+        cy.get('li[title="Next Page"] button[type="button"]').should('be.visible')
+    })
+
+    it('Go to cash->Cash ticket list from menu', ()=>{
+        hp.openMenu()
+        hp.openCashMenu()
+        // go to child pages of Cash menu
+        cy.get('a[href="/home/cash/cash-ticket-list"]').click()
+        cy.wait(8000)
+        cy.get('div[class="back-btn-title"] h1').should('have.text', 'Cash Ticket List')
+        cy.get('li[title="Previous Page"]').should('be.visible')
+        cy.get('li[title="Next Page"] button[type="button"]').should('be.visible')
+    })
+    it.only('Go to cash->Cash ticket list from menu', ()=>{
+        hp.openMenu()
+        hp.openCashMenu()
+        // go to child pages of Cash menu
+        cy.get('a[href="/home/cash/cash-ticket-list"]').click()
+        cy.wait(8000)
+        cy.get('div[class="back-btn-title"] h1').should('have.text', 'Cash Ticket List')
         cy.get('li[title="Previous Page"]').should('be.visible')
         cy.get('li[title="Next Page"] button[type="button"]').should('be.visible')
     })
