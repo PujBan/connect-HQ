@@ -32,7 +32,7 @@ describe('Alerts Child pages', () => {
         ap.verifyPageTitle()
     })
 
-    it('Require field validation',()=>{
+    it('New ticket page Require field validation',()=>{
         ap.clickOnCreateTicketBtn()
         //Applies To
         cy.get('div[id="basic_Applies to_help"] div[class="ant-form-item-explain-error"]').should('have.text','Please enter applies to')

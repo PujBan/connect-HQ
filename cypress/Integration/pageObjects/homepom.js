@@ -6,7 +6,7 @@ class homepage{
     deliveryOrderPackingSlipsspan : () => cy.get(':nth-child(1) > .ant-collapse-header > .ant-collapse-header-text'),
     clickOnPreviewItem: ()=> cy.get(':nth-child(1) > .ant-image-mask'),
     viewPreview: ()=> cy.get('.ant-image-preview-img'),
-    clickOnMenu: ()=> cy.get('.strip.hamburger-strip'),
+    clickOnMenu: ()=> cy.get('div[class="hamburger"] div:nth-child(2)'),
     clickOnAlertsMenu: ()=> cy.get(':nth-child(1) > .ant-menu-submenu-title > .ant-menu-title-content'),
     clickOnCashMenu: ()=> cy.get(":nth-child(2) > .ant-menu-submenu-title > .ant-menu-title-content")
     }
@@ -29,6 +29,7 @@ class homepage{
         cy.get('.ant-layout-content.site-layout-background', {timeout:60000}).should(($x) => {
                     expect($x).to.have.class('ant-layout-content site-layout-background');
         })
+        cy.wait(60000)
     }
     openMenu(){
         this.elements.clickOnMenu().click()

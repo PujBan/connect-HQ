@@ -1,16 +1,16 @@
 /// <reference types = 'cypress' />
 
 const homepage = require('../pageObjects/homepom')
-let hp 
+let hp
 const loginpage = require('../pageObjects/loginpom')
 let login
 
-describe('Home page', ()=>{
+describe('Home page', () => {
 
-    hp= new homepage()
+    hp = new homepage()
     login = new loginpage()
 
-    before(()=>{
+    beforeEach(() => {
         cy.clearAllCookies()
         cy.clearAllLocalStorage()
         cy.clearAllSessionStorage
@@ -25,20 +25,23 @@ describe('Home page', ()=>{
         cy.on("uncaught exception", (err, runnable) => {
             return false;
         });
-        cy.visit(Cypress.env('secondoryURL'))  
+        cy.visit(Cypress.env('secondoryURL'))
+        cy.wait(6000)
+        cy.getCookie('ai_user').should('exist')
         cy.on("uncaught exception", (err, runnable) => {
             return false;
         });
+
     })
 
-    it('Validate span details', ()=>{
+    it('Validate span details', () => {
         hp.openDeliveryOrderPackingSlipSpan()
         cy.wait(6000)
         hp.openPreview()
         hp.viewPreviewImage()
     })
 
-    it('Go to alerts->tickets from menu', ()=>{
+    it('Go to alerts->tickets from menu', () => {
         hp.openMenu()
         hp.openAlertsMenu()
         // go to child pages from alert and perform actions
@@ -47,7 +50,7 @@ describe('Home page', ()=>{
         cy.get('div[class="back-btn-title"] h1').should('have.text', 'New Service Ticket')
     })
 
-    it('Go to alerts->group from menu', ()=>{
+    it('Go to alerts->group from menu', () => {
         hp.openMenu()
         hp.openAlertsMenu()
         // go to child pages from alert and perform actions
@@ -58,7 +61,7 @@ describe('Home page', ()=>{
         cy.get('li[title="Next Page"] button[type="button"]').should('be.visible')
     })
 
-    it('Go to alerts->service from menu', ()=>{
+    it('Go to alerts->service from menu', () => {
         hp.openMenu()
         hp.openAlertsMenu()
         // go to child pages of alerts menu
@@ -69,7 +72,7 @@ describe('Home page', ()=>{
         cy.get('li[title="Next Page"] button[type="button"]').should('be.visible')
     })
 
-    it('Go to cash->Cash ticket list from menu', ()=>{
+    it('Go to cash->Cash ticket list from menu', () => {
         hp.openMenu()
         hp.openCashMenu()
         // go to child pages of Cash menu
@@ -79,15 +82,34 @@ describe('Home page', ()=>{
         cy.get('li[title="Previous Page"]').should('be.visible')
         cy.get('li[title="Next Page"] button[type="button"]').should('be.visible')
     })
-    it.only('Go to cash->Cash ticket list from menu', ()=>{
+    it('Go to cash->Cash History from menu', () => {
         hp.openMenu()
         hp.openCashMenu()
         // go to child pages of Cash menu
-        cy.get('a[href="/home/cash/cash-ticket-list"]').click()
+        cy.get('a[href="/home/cash/cash-ticket-history"]').click()
         cy.wait(8000)
-        cy.get('div[class="back-btn-title"] h1').should('have.text', 'Cash Ticket List')
+        cy.get('div[class="back-btn-title"] h1').should('have.text', 'Cash History')
         cy.get('li[title="Previous Page"]').should('be.visible')
         cy.get('li[title="Next Page"] button[type="button"]').should('be.visible')
+    })
+
+    it('Go to cash->Cash Input from menu', () => {
+        hp.openMenu()
+        hp.openCashMenu()
+        // go to child pages of Cash menu
+        cy.get('a[href="/home/cash/cash-input"]').click()
+        cy.wait(8000)
+        cy.get('div[class="back-btn-title"] h1').should('have.text', 'Cash Input')
+        cy.get('li[title="Previous Page"]').should('be.visible')
+        cy.get('li[title="Next Page"] button[type="button"]').should('be.visible')
+    })
+    it.only('Go to cash->Cash Import from menu', () => {
+        hp.openMenu()
+        hp.openCashMenu()
+        // go to child pages of Cash menu
+        cy.get('a[href="/home/cash/cash-import"]').click()
+        cy.wait(8000)
+        cy.get('div[class="back-btn-title"] h1').should('have.text', 'Cash Import')
     })
 
 })
