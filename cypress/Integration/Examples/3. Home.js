@@ -45,7 +45,7 @@ describe('Home page', () => {
         hp.openMenu()
         hp.openAlertsMenu()
         // go to child pages from alert and perform actions
-        cy.get('a[href="/home/alerts/new-ticket"]').click()
+        hp.openNewTicketPage()
         cy.wait(8000)
         cy.get('div[class="back-btn-title"] h1').should('have.text', 'New Service Ticket')
     })
@@ -54,7 +54,7 @@ describe('Home page', () => {
         hp.openMenu()
         hp.openAlertsMenu()
         // go to child pages from alert and perform actions
-        cy.get('a[href="/home/alerts/group-list"]').click()
+        hp.opengrouppage()
         cy.wait(8000)
         cy.get('div[class="back-btn-title"] h1').should('have.text', 'Group')
         cy.get('li[title="Previous Page"]').should('be.visible')
@@ -65,7 +65,7 @@ describe('Home page', () => {
         hp.openMenu()
         hp.openAlertsMenu()
         // go to child pages of alerts menu
-        cy.get('a[href="/home/alerts/service-list"]').click()
+        hp.openServicePage()
         cy.wait(8000)
         cy.get('div[class="back-btn-title"] h1').should('have.text', 'Service')
         cy.get('li[title="Previous Page"]').should('be.visible')
@@ -76,7 +76,7 @@ describe('Home page', () => {
         hp.openMenu()
         hp.openCashMenu()
         // go to child pages of Cash menu
-        cy.get('a[href="/home/cash/cash-ticket-list"]').click()
+        hp.openCashTicket()
         cy.wait(8000)
         cy.get('div[class="back-btn-title"] h1').should('have.text', 'Cash Ticket List')
         cy.get('li[title="Previous Page"]').should('be.visible')
@@ -86,7 +86,7 @@ describe('Home page', () => {
         hp.openMenu()
         hp.openCashMenu()
         // go to child pages of Cash menu
-        cy.get('a[href="/home/cash/cash-ticket-history"]').click()
+        hp.openCashHistory()
         cy.wait(8000)
         cy.get('div[class="back-btn-title"] h1').should('have.text', 'Cash History')
         cy.get('li[title="Previous Page"]').should('be.visible')
@@ -97,17 +97,17 @@ describe('Home page', () => {
         hp.openMenu()
         hp.openCashMenu()
         // go to child pages of Cash menu
-        cy.get('a[href="/home/cash/cash-input"]').click()
+        hp.openCashInput()
         cy.wait(8000)
         cy.get('div[class="back-btn-title"] h1').should('have.text', 'Cash Input')
         cy.get('li[title="Previous Page"]').should('be.visible')
         cy.get('li[title="Next Page"] button[type="button"]').should('be.visible')
     })
-    it.only('Go to cash->Cash Import from menu', () => {
+    it('Go to cash->Cash Import from menu', () => {
         hp.openMenu()
         hp.openCashMenu()
         // go to child pages of Cash menu
-        cy.get('a[href="/home/cash/cash-import"]').click()
+        hp.openCashImport()
         cy.wait(8000)
         cy.get('div[class="back-btn-title"] h1').should('have.text', 'Cash Import')
     })
