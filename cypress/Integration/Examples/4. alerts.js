@@ -165,7 +165,7 @@ describe('Alerts Child pages', () => {
         cy.get('button[class="ant-btn ant-btn-primary ant-btn-sm page-header-btn"] span').click()
     
     })
-    it.only('Close add call', ()=>{
+    it('Close add call', ()=>{
         hp.openMenu()
         hp.openAlertsMenu()
         hp.openServicePage()

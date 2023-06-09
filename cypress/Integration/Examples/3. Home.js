@@ -112,7 +112,7 @@ describe('Home page', () => {
         cy.get('div[class="back-btn-title"] h1').should('have.text', 'Cash Import')
     })
 
-    it.only('Search box', () => {
+    it('Search box', () => {
         hp.clickOnSearchBox()
         cy.wait(6000)
         hp.enterSearchText('connect-HQ')

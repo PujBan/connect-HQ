@@ -22,7 +22,7 @@ describe('Forgot password page', ()=>{
     // it('Required filed Validation',()=>{
 
     // })
-    it.only('Invalid user',()=>{
+    it('Invalid user',()=>{
         fp.clickForgotPassword() 
         fp.getforgotpasswordpage()
         cy.url().should('include', 'https://openid.qaconnecthq.live/Identity/Account/ForgotPassword')
