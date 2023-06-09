@@ -165,13 +165,15 @@ describe('Alerts Child pages', () => {
         cy.get('button[class="ant-btn ant-btn-primary ant-btn-sm page-header-btn"] span').click()
     
     })
-    it.only('Click on add call', ()=>{
+    it.only('Close add call', ()=>{
         hp.openMenu()
         hp.openAlertsMenu()
         hp.openServicePage()
         cy.wait(4000)
         cy.get('div[class="back-btn-title"] h1').should('have.text', 'Service')
+        cy.wait(4000)
         cy.get('button[class="ant-btn ant-btn-primary ant-btn-sm page-header-btn"] span').click()
+        cy.wait(4000)
         //close add call pop-up
         cy.get('body div button:nth-child(2)').click()
     })

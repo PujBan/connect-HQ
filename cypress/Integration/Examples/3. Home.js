@@ -112,4 +112,13 @@ describe('Home page', () => {
         cy.get('div[class="back-btn-title"] h1').should('have.text', 'Cash Import')
     })
 
+    it.only('Search box', () => {
+        hp.clickOnSearchBox()
+        cy.wait(6000)
+        hp.enterSearchText('connect-HQ')
+        hp.clickOnFirstSearchedItem()
+        // verify title of a page
+        cy.xpath('(//div[@class="page-header"])[1]').should('have.text', 'Customer Detail')
+    })
+
 })

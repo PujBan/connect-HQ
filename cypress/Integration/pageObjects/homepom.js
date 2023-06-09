@@ -15,7 +15,11 @@ class homepage{
     cashTicket:()=> cy.get('a[href="/home/cash/cash-ticket-list"]'),
     cashHistory:()=> cy.get('a[href="/home/cash/cash-ticket-history"]'),
     cashInput:()=>cy.get('a[href="/home/cash/cash-input"]'),
-    cashImport:()=>cy.get('a[href="/home/cash/cash-import"]')
+    cashImport:()=>cy.get('a[href="/home/cash/cash-import"]'),
+    search:() => cy.xpath('//button[@class="ant-btn ant-btn-link"]'),
+    searchText:()=> cy.get('#rc_select_1'),
+    firstSearcheditem: ()=>cy.xpath('//div[@class="ant-modal-body"]//li[1]'),
+
     }
 
     openDeliveryOrderPackingSlipSpan(){
@@ -52,7 +56,6 @@ class homepage{
     }
     openServicePage(){
         this.elements.service().click()
-
     }
     openCashMenu(){
         this.elements.clickOnCashMenu().click()        
@@ -68,6 +71,19 @@ class homepage{
     }
     openCashImport(){
         this.elements.cashImport().click()  
+    }
+    clickOnSearchBox(){
+        this.elements.search().click()
+    }
+    enterSearchText(inputText){
+        this.elements.searchText().type(inputText)
+        cy.wait(6000)
+        //this.elements.searchText().clear()
+        this.elements.searchText().type('{selectall}{backspace}')
+        //this.elements.searchText().invoke('val', '')
+    }
+    clickOnFirstSearchedItem(){
+        this.elements.firstSearcheditem().click()
     }
 
     
